@@ -3,7 +3,7 @@ body {
   overflow-y: hidden;
   background-color: #fff;
 }
-#vidaPlaneta {
+#medidorPlaneta {
   border: 2px solid #000;
   width: 300px;
   height: 20px;
@@ -29,9 +29,14 @@ body {
 .bomba {
   width: 40px;
   height: 40px;
-  background-image: url("");
+  background-size: cover;
+  background-image: url("./Imagens/AsteroidBrown.png");
   position: absolute;
 }
+/* .contBombas img {
+  width: 40px;
+  height: 40px;
+} */
 .tiroJog {
   width: 6px;
   height: 6px;
@@ -39,9 +44,14 @@ body {
   border-radius: 10px;
   position: absolute;
 }
-.explosaoAr {
+.explosaoChao {
   width: 55px;
   height: 57px;
+  position: absolute;
+}
+.explosaoAr {
+  width: 70px;
+  height: 70px;
   position: absolute;
 }
 .telaMsg {
