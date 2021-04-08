@@ -56,18 +56,18 @@ function criaBomba() {
     }
   }, 2000);
 }
+
 function controlaBomba() {
-  bombasTotal = document.getElementsByClassName("bomba");
+  let bombasTotal = document.getElementsByClassName("bomba");
   let tam = bombasTotal.length;
   for (let i = 0; i < tam; i++) {
     if (bombasTotal[i]) {
       let pi = bombasTotal[i].offsetTop;
-      //console.log(pi);
+      // console.log(pi);
       pi += 2; //posiçao do indice
       //console.log(pi);
-      console.log(bombasTotal[i].style.top);
+      // console.log(bombasTotal[i].style.top);
       bombasTotal[i].style.top = pi + "px";
-      console.log(bombasTotal[i].style.top);
       if (pi > tamTelaH) {
         vidaPlaneta = -10;
         // criaExplosao(2, bombasTotal[i].offsetLeft, null);
@@ -86,7 +86,7 @@ function atira(x, y) {
   t.setAttributeNode(att1);
   t.setAttributeNode(att2);
   document.body.appendChild(t);
-  console.log(t);
+  // console.log(t);
 }
 
 function controleTiros() {
@@ -98,40 +98,46 @@ function controleTiros() {
       pt -= velT; //velocidade de tiro
       tiros[i].style.top = pt + "px";
       //colisaoTiroBomba(tiros[i]);
-      if (pt < 0) {
-        tiros[i].remove(); // todas os tiros q sairem da tela serão removidos
-      }
+      // if (pt < 0) {
+      //   tiros[i].remove(); // todas os tiros q sairem da tela serão removidos
+      // }
     }
   }
 }
 
-function colisaoTiroBomba(tiro) {
-  let tam = bombasTotal.Length;
-  for (let i = 0; i < tam.length; i++) {
-    if (bombasTotal[i]) {
-      if (
-        tiro.offsetTop <=
-          bombasTotal[i].offsetTop + 40 /*cima tiro com baixo bomba*/ &&
-        tiro.offsetTop + 6 >=
-          bombasTotal[i].offsetTop /*baixo tiro com cima bomba*/ &&
-        //verificação do y. 40 é a altura da bomba e 6 é o tamanho do tiroJog
+function colisaoTiroBomba() {
+  //
+  let tiros = document.getElementsByClassName("tiroJog");
+  let numeroTiros = tiros.length;
+  let bombasTotal = document.getElementsByClassName("bomba");
+  let tam = bombasTotal.length;
+  if (tam !== 0 && numeroTiros !== 0) {
+    for (let i = 0; i < tam; i++) {
+      for (let j = 0; j < numeroTiros; j++) {
+        if (
+          tiros[j].offsetTop <=
+            bombasTotal[i].offsetTop + 40 /*cima tiro com baixo bomba*/ &&
+          tiros[j].offsetTop + 6 >= bombasTotal[i].offsetTop && //verificação do y. 40 é a altura da bomba e 6 é o tamanho do tiroJog
+          /*baixo tiro com cima bomba*/ tiros[j].offsetLeft <=
+            bombasTotal[i].offsetLeft + 24 /*24 é a largura da bomba*/ && // parte esquerda do tiro com direita da bomba
+          tiros[j].offsetLeft + 6 >= bombasTotal[i].offsetLeft //Direita do tiro com a parte esquerda da bomba
+        ) {
+          console.log("colisão");
+          //console.log(“rolou colisão”);
+          // criaExplosao(
+          //   1,
+          //   bombasTotal[i].offsetLeft + 25,
+          //   bombasTotal[i].offsetTop
+          // );
 
-        tiro.offsetLeft <=
-          bombasTotal[i].offsetLeft + 24 /*24 é a largura da bomba*/ && // parte esquerda do tiro com direita da bomba
-        tiro.offsetLeft + 6 >= bombasTotal[i].offsetLeft //Direita do tiro com a parte esquerda da bomba
-      ) {
-        // criaExplosao(
-        //   1,
-        //   bombasTotal[i].offsetLeft + 25,
-        //   bombasTotal[i].offsetTop
-        // );
-        // bombasTotal[i].remove();
-        // tiro.remove();
+          document.body.removeChild(tiros[j]);
+          document.body.removeChild(bombasTotal[i]);
+          return;
+        }
       }
     }
   }
 }
-
 function controlaJogador() {
   pjy += diryJ * velJ;
   pjx += dirxJ * velJ;
@@ -150,6 +156,7 @@ function gameLoop() {
 
     controlaJogador();
     controleTiros();
+    colisaoTiroBomba();
   }
   frames = requestAnimationFrame(gameLoop);
 }
@@ -206,7 +213,7 @@ function inicia() {
   pjy = tamTelaH / 2;
   velJ = velT = 5;
   jog = document.getElementById("naveJog");
-  console.log(jog);
+  // console.log(jog);
   jog.style.top = pjy + "px";
   jog.style.left = pjx + "px";
 
