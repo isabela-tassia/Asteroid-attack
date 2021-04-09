@@ -8,7 +8,7 @@ let painelContBombas, velB, tmpCriaBomba; //tempo
 let bombasTotal;
 let vidaPlaneta;
 let ie; //indice de explosao[
-let isom; //indice som
+let isom = 0; //indice som
 
 function teclaDw(event) {
   let tecla = event.code; // olhar o race car
@@ -69,9 +69,15 @@ function controlaBomba() {
       // console.log(bombasTotal[i].style.top);
       bombasTotal[i].style.top = pi + "px";
       if (pi > tamTelaH) {
-        vidaPlaneta = -10;
+        
         // criaExplosao(2, bombasTotal[i].offsetLeft, null);
-        bombasTotal[i].remove();
+        document.getElementById("barraPlaneta").value -= 0.1;
+        let value = document.getElementById("barraPlaneta").value
+        document.body.removeChild(bombasTotal[i]);
+        if(value==0){
+          jogo=false;
+          alert('Perdeu!')
+        }
       }
     }
   }
@@ -124,26 +130,35 @@ function colisaoTiroBomba() {
         ) {
           console.log("colisão");
           //console.log(“rolou colisão”);
-          // criaExplosao(
-          //   1,
-          //   bombasTotal[i].offsetLeft + 25,
-          //   bombasTotal[i].offsetTop
-          // );
+           criaExplosao(bombasTotal[i]);
+            // 1,
+            // bombasTotal[i].offsetLeft + 25,
+            // bombasTotal[i].offsetTop
+         
 
           document.body.removeChild(tiros[j]);
           document.body.removeChild(bombasTotal[i]);
           return;
         }
+
       }
     }
   }
 }
+
 function controlaJogador() {
   pjy += diryJ * velJ;
   pjx += dirxJ * velJ;
   jog.style.top = pjy + "px";
   jog.style.left = pjx + "px";
 }
+
+// function gerenciaGame() {
+//   barraPlaneta.style.width = vidaPlaneta + "px";
+//   if (contBombas <= 0) {
+//     jogo = false;
+//   }
+// }
 
 function gameLoop() {
   if (jogo) {
@@ -161,45 +176,14 @@ function gameLoop() {
   frames = requestAnimationFrame(gameLoop);
 }
 
-// function criaExplosao(tipo, x, y) {
-//   //tipo 1= ar. tipo 2 = terra
-//   let explosao = document("div");
-//   var img = document.createElement("img");
-//   let som = document.createElement("audio");
-//   //atributos para div
-//   let att1 = document.createAttribute("class");
-//   let att2 = document.createAttribute("style");
-//   let att3 = document.createAttribute("id");
-//   //atributos para audio
-//   let att4 = document.createAttribute("src");
-//   // atributos para audio
-//   let att5 = document.createAttribute("class");
-//   let att6 = document.createAttribute("id");
-
-//   att3.value = "explosao" + ie;
-//   if (tipo == 1) {
-//     att1.value = "explosaoAr";
-//     att2.value = "top" + y + "px;left" + x + "px;";
-//     att4.value = ""; // inserir a imagem de explosão aqui
-//   } else {
-//     att1.value = "explosaoChao";
-//     att2.value = "top:" + (tamTelaH - 57) + "px;left:" + (x - 17) + "px;";
-//     att4.value = ""; //inserir a imagem de explosão aqui
-//   }
-//   att5.value = "./Imagens/Explosion.flac";
-//   att6.value = "som" + isom; //indice som
-//   explosao.setAttributeNode(att1);
-//   explosao.setAttributeNode(att2);
-//   explosao.setAttributeNode(att3);
-//   img.setAttributeNode(att4);
-//   som.setAttributeNode(att5);
-//   som.setAttributeNode(att6);
-//   document.body.appendChild(explosao);
-//   document.getElementById("som" + isom).play();
-
-//   ie++;
-//   isom++;
-// }
+function criaExplosao(bomba) {
+ bomba.style.backgroundImage="url('./Imagens/explosion2')"
+  let soundExplosion = new Audio();
+  soundExplosion.src='./Imagens/Explosion.flac'; 
+  soundExplosion.play();
+  
+ 
+}
 
 function inicia() {
   jogo = true; //false;
@@ -214,12 +198,18 @@ function inicia() {
   velJ = velT = 5;
   jog = document.getElementById("naveJog");
   // console.log(jog);
+
   jog.style.top = pjy + "px";
   jog.style.left = pjx + "px";
 
   // controles das bombas
 
   criaBomba(50);
+  barraPlaneta = document.getElementById("barraPlaneta");
+  barraPlaneta.style.width = vidaPlaneta + "px";
+
+  //telaMsg
+  //telaMsg=document.getElementsById('telaMsg')
 
   gameLoop();
 }
