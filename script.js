@@ -38,9 +38,7 @@ function teclaUp(event) {
     //Cima
     diryJ = 0;
   }
-  //   } else if(tecla == "Space") {
-
-  //   }
+ 
 }
 
 function criaBomba() {
@@ -65,19 +63,15 @@ function controlaBomba() {
       let pi = bombasTotal[i].offsetTop;
       // console.log(pi);
       pi += 2; //posiçao do indice
-      //console.log(pi);
-      // console.log(bombasTotal[i].style.top);
       bombasTotal[i].style.top = pi + "px";
       if (pi > tamTelaH) {
-        
-        // criaExplosao(2, bombasTotal[i].offsetLeft, null);
-        document.getElementById("barraPlaneta").value -= 0.1;
-        let value = document.getElementById("barraPlaneta").value
-        document.body.removeChild(bombasTotal[i]);
-        if(value==0){
-          jogo=false;
-          alert('Perdeu!')
-        }
+       document.getElementById("barraPlaneta").value -= 0.1;
+       let value = document.getElementById("barraPlaneta").value
+       document.body.removeChild(bombasTotal[i]);
+       if(value==0){
+       jogo=false;
+       alert('Perdeu!')
+       }
       }
     }
   }
@@ -103,10 +97,7 @@ function controleTiros() {
       let = pt = tiros[i].offsetTop; //posição tiro
       pt -= velT; //velocidade de tiro
       tiros[i].style.top = pt + "px";
-      //colisaoTiroBomba(tiros[i]);
-      // if (pt < 0) {
-      //   tiros[i].remove(); // todas os tiros q sairem da tela serão removidos
-      // }
+     
     }
   }
 }
@@ -129,18 +120,12 @@ function colisaoTiroBomba() {
           tiros[j].offsetLeft + 6 >= bombasTotal[i].offsetLeft //Direita do tiro com a parte esquerda da bomba
         ) {
           console.log("colisão");
-          
-           criaExplosao(bombasTotal[i]);
-           
-         
-
+          criaExplosao(bombasTotal[i]);
           document.body.removeChild(tiros[j]);
           setTimeout( () => {
-            document.body.removeChild(bombasTotal[i])}, 1000)
-            
+          document.body.removeChild(bombasTotal[i])}, 1000)
           return;
         }
-
       }
     }
   }
@@ -153,22 +138,10 @@ function controlaJogador() {
   jog.style.left = pjx + "px";
 }
 
-// function gerenciaGame() {
-//   barraPlaneta.style.width = vidaPlaneta + "px";
-//   if (contBombas <= 0) {
-//     jogo = false;
-//   }
-// }
-
 function gameLoop() {
   if (jogo) {
-    //Funções de controle
-    // contBombas++;
-    // if (contBombas % 200 == 0) {
-    //   criaBomba();
+   
     controlaBomba();
-    // }
-
     controlaJogador();
     controleTiros();
     colisaoTiroBomba();
@@ -176,14 +149,17 @@ function gameLoop() {
   frames = requestAnimationFrame(gameLoop);
 }
 
+// let soundGame = new Audio();
+// soundGame.src='./midia/Stranded-in-the-Asteroid-Belt'; 
+// soundExplosion.volume = 0.2;
+// soundExplosion.play();
+
 function criaExplosao(bomba) {
- bomba.style.backgroundImage="url('./Imagens/explosion2.png')"
+ bomba.style.backgroundImage="url('./midia/explosion2.png')"
   let soundExplosion = new Audio();
-  soundExplosion.src='./Imagens/Explosion.flac'; 
+  soundExplosion.src='./midia/Explosion.flac'; 
   soundExplosion.volume = 0.2;
   soundExplosion.play();
-  
- 
 }
 
 function inicia() {
@@ -191,6 +167,9 @@ function inicia() {
   // ini Tela
   tamTelaH = window.innerHeight;
   tamTelaW = window.innerWidth;
+  
+  document.body.style.backgroundImage="url('./midia/uni.jpg')";
+  
 
   // ini jogador
   dirxJ = diryJ = 0;
@@ -208,9 +187,7 @@ function inicia() {
   criaBomba(50);
   barraPlaneta = document.getElementById("barraPlaneta");
   barraPlaneta.style.width = vidaPlaneta + "px";
-
-  //telaMsg
-  //telaMsg=document.getElementsById('telaMsg')
+ 
 
   gameLoop();
 }
