@@ -149,6 +149,11 @@ function gameLoop() {
   frames = requestAnimationFrame(gameLoop);
 }
 
+// let soundGame = new Audio();
+// soundGame.src='./midia/Stranded-in-the-Asteroid-Belt'; 
+// soundExplosion.volume = 0.2;
+// soundExplosion.play();
+
 function criaExplosao(bomba) {
  bomba.style.backgroundImage="url('./midia/explosion2.png')"
   let soundExplosion = new Audio();
@@ -182,7 +187,7 @@ function inicia() {
   criaBomba(50);
   barraPlaneta = document.getElementById("barraPlaneta");
   barraPlaneta.style.width = vidaPlaneta + "px";
-
+ 
 
   gameLoop();
 }
