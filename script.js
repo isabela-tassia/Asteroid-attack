@@ -191,6 +191,9 @@ function inicia() {
   // ini Tela
   tamTelaH = window.innerHeight;
   tamTelaW = window.innerWidth;
+  
+  document.body.style.backgroundImage="url('./Imagens/uni.jpg')";
+  
 
   // ini jogador
   dirxJ = diryJ = 0;
@@ -209,8 +212,6 @@ function inicia() {
   barraPlaneta = document.getElementById("barraPlaneta");
   barraPlaneta.style.width = vidaPlaneta + "px";
 
-  //telaMsg
-  //telaMsg=document.getElementsById('telaMsg')
 
   gameLoop();
 }
