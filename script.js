@@ -129,15 +129,15 @@ function colisaoTiroBomba() {
           tiros[j].offsetLeft + 6 >= bombasTotal[i].offsetLeft //Direita do tiro com a parte esquerda da bomba
         ) {
           console.log("colisão");
-          //console.log(“rolou colisão”);
+          
            criaExplosao(bombasTotal[i]);
-            // 1,
-            // bombasTotal[i].offsetLeft + 25,
-            // bombasTotal[i].offsetTop
+           
          
 
           document.body.removeChild(tiros[j]);
-          document.body.removeChild(bombasTotal[i]);
+          setTimeout( () => {
+            document.body.removeChild(bombasTotal[i])}, 1000)
+            
           return;
         }
 
@@ -177,9 +177,10 @@ function gameLoop() {
 }
 
 function criaExplosao(bomba) {
- bomba.style.backgroundImage="url('./Imagens/explosion2')"
+ bomba.style.backgroundImage="url('./Imagens/explosion2.png')"
   let soundExplosion = new Audio();
   soundExplosion.src='./Imagens/Explosion.flac'; 
+  soundExplosion.volume = 0.2;
   soundExplosion.play();
   
  
