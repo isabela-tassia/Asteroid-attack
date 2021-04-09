@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  background-image: url(/Imagens/uni.jpg);
+  background-image: url("./Imagens/uni.jpg");
   background-position: center center;
   background-repeat: repeat repeat;
   background-size: cover;
