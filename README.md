@@ -15,7 +15,7 @@ I am a holistic therapist and currently a student at Ironhack!
 
 ## Play now!
 
-You can play this game  [on this link!](https://isabela-tassia.github.io/Space-invaders/)
+You can play this game  [on this link!](https://isabela-tassia.github.io/Asteroid-attack/)
 
 ## Find out more about this project
 
